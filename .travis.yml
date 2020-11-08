@@ -5,7 +5,7 @@ sudo: required
 services:
   - docker
 
-before_ins   tall:
+before_install:
   - docker build -t yeo311/react-test-app -f ./frontend/Dockerfile.dev ./frontend
 
 script:
@@ -22,15 +22,15 @@ after_success:
   - docker push yeo311/docker-backend
   - docker push yeo311/docker-nginx
 
-deploy:
-  provider: elasticbeanstalk
-  region: "ap-northeast-2"
-  app: "docker-fullstack-app"
-  env: "DockerFullstackApp-env"
-  bucket_name: elasticbeanstalk-ap-northeast-2-972153559337
-  bucket_path: "docker-fullstack-app"
-  on:
-    branch: master
+# deploy:
+#   provider: elasticbeanstalk
+#   region: "ap-northeast-2"
+#   app: "docker-fullstack-app"
+#   env: "DockerFullstackApp-env"
+#   bucket_name: elasticbeanstalk-ap-northeast-2-972153559337
+#   bucket_path: "docker-fullstack-app"
+#   on:
+#     branch: master
   
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key: $AWS_SECRET_ACCESS_KEY
