@@ -5,22 +5,22 @@ sudo: required
 services:
   - docker
 
-before_install:
-  - docker build -t smileajw1004/react-test-app -f ./frontend/Dockerfile.dev ./frontend
+before_ins   tall:
+  - docker build -t yeo311/react-test-app -f ./frontend/Dockerfile.dev ./frontend
 
 script:
-  - docker run -e CI=true smileajw1004/react-test-app npm test
+  - docker run -e CI=true yeo311/react-test-app npm test
 
 after_success:
-  - docker build -t smileajw1004/docker-frontend ./frontend
-  - docker build -t smileajw1004/docker-backend ./backend
-  - docker build -t smileajw1004/docker-nginx ./nginx
+  - docker build -t yeo311/docker-frontend ./frontend
+  - docker build -t yeo311/docker-backend ./backend
+  - docker build -t yeo311/docker-nginx ./nginx
 
   - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
 
-  - docker push smileajw1004/docker-frontend
-  - docker push smileajw1004/docker-backend
-  - docker push smileajw1004/docker-nginx
+  - docker push yeo311/docker-frontend
+  - docker push yeo311/docker-backend
+  - docker push yeo311/docker-nginx
 
 deploy:
   provider: elasticbeanstalk
